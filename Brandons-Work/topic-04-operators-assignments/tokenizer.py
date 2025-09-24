@@ -158,7 +158,7 @@ def test_error():
         assert "Syntax error" in str(e),f"Unexpected exception: {e}"
 
 def test_bangell():
-    print("test bangell token")
+    print("test kent-id token")
     t = tokenize("bangell")
     assert len(t) == 2
     assert t[0]["tag"] == "bangell"

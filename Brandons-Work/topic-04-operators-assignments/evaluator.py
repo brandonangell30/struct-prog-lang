@@ -12,7 +12,7 @@ def evaluate(ast, environment):
             value = evaluate(statement, environment)
             last_value = value
         return last_value
-    if ast["tag"] == "bagnell":
+    if ast["tag"] == "bangell":
         environment["__kentid__"] = "bangell@kent.edu"
         return "__kentid__"
     if ast["tag"] == "print":

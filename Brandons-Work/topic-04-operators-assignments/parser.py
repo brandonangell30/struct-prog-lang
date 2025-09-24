@@ -345,7 +345,6 @@ def test_parse_program():
     }
 
 def test_bangell():
-    print("testing test_bangell()...")
     ast, tokens = parse_program(tokenize("bangell"))
     assert ast == {
         "tag": "program",
