@@ -566,7 +566,7 @@ def evaluate(ast, environment, watch=None):
             imported_tokens = tokenize(source_code)
             imported_ast = parse(imported_tokens)
             # Evaluate in the current environment.
-            return evaluate(imported_ast, environment, watcher) # Propagates value and status from imported code
+            return evaluate(imported_ast, environment, watch) # Propagates value and status from imported code
         except FileNotFoundError:
             raise Exception(f"ImportError: File not found '{filename_val}'")
         except Exception as e:
