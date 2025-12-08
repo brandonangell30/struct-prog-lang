@@ -555,14 +555,26 @@ def test_parse_arithmetic_factor():
         assert parse_arithmetic_factor(t)[0] == parse_complex_expression(t)[0]
 
 
+def parse_arithmetic_power(tokens):
+    """
+    arithmetic_power = arithmetic_factor "**" arithmetic_factor 
+    """
+    left_side, tokens = parse_arithmetic_factor(tokens)
+    while tokens[0]["tag"] == "**":
+        tag = tokens[0]["tag"]
+        right_side, tokens = parse_arithmetic_factor(tokens[1:])
+        left_side = {"tag": tag, "left": left_side, "right": right_side}
+    return left_side, tokens
+
+
 def parse_arithmetic_term(tokens):
     """
     arithmetic_term = arithmetic_factor { ("*" | "/" | "%") arithmetic_factor }
     """
-    node, tokens = parse_arithmetic_factor(tokens)
+    node, tokens = parse_arithmetic_power(tokens)
     while tokens[0]["tag"] in ["*", "/", "%"]:
         tag = tokens[0]["tag"]
-        next_node, tokens = parse_arithmetic_factor(tokens[1:])
+        next_node, tokens = parse_arithmetic_power(tokens[1:])
         node = {"tag": tag, "left": node, "right": next_node}
     return node, tokens
 

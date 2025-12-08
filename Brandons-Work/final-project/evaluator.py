@@ -246,6 +246,16 @@ def evaluate(ast, environment):
         if types == "number-string":
             return int(left_value) * right_value, None # Corrected order
         raise Exception(f"Illegal types for {ast['tag']}:{types}")
+    
+    if ast["tag"] == "**":
+        left_value, l_status = evaluate(ast["left"], environment)
+        if l_status == "exit": return left_value, "exit"
+        right_value, r_status = evaluate(ast["right"], environment)
+        if r_status == "exit": return right_value, "exit"
+        types = type_of(left_value, right_value)
+        if types == "number-number":
+            return left_value ** right_value, None
+        raise Exception(f"Illegal types for {ast['tag']}:{types}")
 
     if ast["tag"] == "/":
         left_value, l_status = evaluate(ast["left"], environment)
