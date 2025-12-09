@@ -21,6 +21,7 @@ grammar = """
     complex_expression = simple_expression { ("[" expression "]") | ("." identifier) | "(" [ expression { "," expression } ] ")" }
 
     arithmetic_factor = complex_expression
+    arithmetic_power = arithmetic_factor "**" arithmetic_factor 
     arithmetic_term = arithmetic_factor { ("*" | "/" | "%") arithmetic_factor }
     arithmetic_expression = arithmetic_term { ("+" | "-") arithmetic_term }
     relational_expression = arithmetic_expression { ("<" | ">" | "<=" | ">=" | "==" | "!=") arithmetic_expression }
